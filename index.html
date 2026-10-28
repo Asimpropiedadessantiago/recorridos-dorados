@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recorridos Dorados · Aventura y libertad | Nancy Andara</title>
+  <link rel="icon" href="img/logo-dark.png">
+  <meta name="description" content="Viajes a Perú y Machu Picchu pensados para adultos mayores: a tu ritmo, acompañado y con todo resuelto. Agenda una visita informativa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --ink-soft: #4a453d;
+      --paper: #faf7f1;
+      --paper-2: #f2ece0;
+      --gold: #b8893b;
+      --gold-light: #d9b56f;
+      --gold-deep: #8a6424;
+      --line: #e2d9c7;
+      --night: #14130f;
+      --radius: 18px;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Jost", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    .wrap { width: min(1180px, 100% - 40px); margin-inline: auto; }
+    .eyebrow {
+      font-size: .82rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold-deep); font-weight: 500;
+    }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.08; }
+    h2 { font-size: clamp(2.3rem, 4.6vw, 3.6rem); margin: .4em 0 .35em; }
+    h2 em, h1 em { font-style: italic; color: var(--gold); }
+    .lead { font-size: 1.15rem; color: var(--ink-soft); max-width: 38em; font-weight: 300; }
+    section { padding: clamp(80px, 11vw, 140px) 0; }
+
+    /* Botones */
+    .btn {
+      display: inline-flex; align-items: center; gap: .6em;
+      padding: 1em 1.8em; border-radius: 999px; border: 1.5px solid transparent;
+      font: 500 1rem var(--sans); letter-spacing: .03em; text-decoration: none;
+      cursor: pointer; transition: transform .25s, background .25s, color .25s, border-color .25s, box-shadow .25s;
+      min-height: 56px;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .chip:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--gold-light); outline-offset: 3px;
+    }
+    .btn-gold { background: var(--gold); color: #fff; box-shadow: 0 10px 30px -10px rgba(184,137,59,.7); }
+    .btn-gold:hover { background: var(--gold-deep); }
+    .btn-ghost { border-color: rgba(255,255,255,.6); color: #fff; }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-dark:hover { background: #000; }
+
+    /* Navegación */
+    .nav {
+      position: fixed; inset: 0 0 auto; z-index: 50;
+      transition: background .4s, box-shadow .4s, padding .4s;
+      padding: 22px 0;
+    }
+    .nav.scrolled { background: rgba(250,247,241,.92); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); padding: 12px 0; }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; transition: color .4s; }
+    .nav.scrolled .brand { color: var(--ink); }
+    .brand img { height: 64px; width: auto; transition: height .4s; }
+    .nav.scrolled .brand img { height: 50px; }
+    .brand .logo-on-light, .nav.scrolled .brand .logo-on-dark { display: none; }
+    .nav.scrolled .brand .logo-on-light { display: block; }
+    .nav-links { display: flex; align-items: center; gap: 34px; list-style: none; }
+    .nav-links a { text-decoration: none; color: rgba(255,255,255,.88); font-size: .95rem; transition: color .3s; }
+    .nav.scrolled .nav-links a { color: var(--ink-soft); }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav .btn { padding: .7em 1.4em; min-height: 48px; }
+    .nav .btn { white-space: nowrap; }
+    @media (max-width: 860px) { .nav-links li:not(:last-child) { display: none; } }
+    @media (max-width: 480px) {
+      .brand img { height: 52px; }
+      .nav.scrolled .brand img { height: 44px; }
+      .nav .btn { padding: .55em 1em; min-height: 44px; font-size: .85rem; }
+    }
+
+    /* Hero */
+    .hero {
+      position: relative; min-height: 100svh; display: flex; align-items: flex-end;
+      color: #fff; overflow: hidden; padding: 0 0 clamp(60px, 9vh, 110px);
+    }
+    .hero picture, .hero picture img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero picture img { animation: kenburns 24s ease-out forwards; transform-origin: 70% 60%; }
+    @keyframes kenburns { from { transform: scale(1.14); } to { transform: scale(1); } }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10,9,7,.55) 0%, rgba(10,9,7,.05) 32%, rgba(10,9,7,.15) 55%, rgba(10,9,7,.82) 100%),
+        linear-gradient(90deg, rgba(10,9,7,.55) 0%, rgba(10,9,7,0) 60%);
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero .eyebrow { color: var(--gold-light); }
+    .hero h1 {
+      font-size: clamp(3.4rem, 9vw, 7.8rem); font-weight: 500; letter-spacing: -.01em;
+      margin: .18em 0 .1em;
+    }
+    .hero h1 em { color: var(--gold-light); }
+    .hero-sub {
+      font-family: var(--serif); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.3rem);
+      color: rgba(255,255,255,.92); margin-bottom: .7em;
+    }
+    .hero-sub b { font-weight: 500; color: var(--gold-light); font-style: normal; padding: 0 .25em; }
+    .hero p.lead { color: rgba(255,255,255,.85); margin-bottom: 2em; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-meta {
+      position: absolute; right: 26px; bottom: 120px; z-index: 2;
+      font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7);
+      writing-mode: vertical-rl;
+    }
+    .scroll-cue {
+      position: absolute; left: 50%; bottom: 22px; z-index: 2; translate: -50% 0;
+      width: 26px; height: 42px; border: 1.5px solid rgba(255,255,255,.6); border-radius: 20px;
+    }
+    .scroll-cue::after {
+      content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px;
+      background: var(--gold-light); border-radius: 2px; animation: cue 2s infinite;
+    }
+    @keyframes cue { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+    @media (max-width: 860px) { .hero-meta, .scroll-cue { display: none; } }
+
+    /* Pilares */
+    .pillars { padding: 0; background: var(--paper); position: relative; z-index: 3; }
+    .pillars-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: #fff; border-radius: var(--radius); margin-top: -60px;
+      box-shadow: 0 30px 60px -30px rgba(28,26,23,.25);
+    }
+    .pillar { padding: 34px 30px; border-right: 1px solid var(--line); }
+    .pillar:last-child { border-right: 0; }
+    .pillar svg { width: 34px; height: 34px; color: var(--gold); margin-bottom: 14px; }
+    .pillar h3 { font-size: 1.5rem; margin-bottom: .25em; }
+    .pillar p { font-size: .95rem; color: var(--ink-soft); }
+    @media (max-width: 960px) {
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .pillar:nth-child(2) { border-right: 0; }
+      .pillar:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+    @media (max-width: 560px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar { border-right: 0; border-bottom: 1px solid var(--line); }
+      .pillar:last-child { border-bottom: 0; }
+    }
+
+    /* Intro / experiencia */
+    .intro-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+    .intro-photos { position: relative; aspect-ratio: 4 / 5; }
+    .intro-photos img { position: absolute; object-fit: cover; border-radius: var(--radius); box-shadow: 0 30px 60px -30px rgba(0,0,0,.4); }
+    .intro-photos img:first-child { inset: 0 22% 12% 0; width: 78%; height: 88%; }
+    .intro-photos img:last-child { right: 0; bottom: 0; width: 48%; height: 52%; border: 8px solid var(--paper); }
+    .stats { display: flex; gap: 40px; margin-top: 2.2em; flex-wrap: wrap; }
+    .stat b { display: block; font-family: var(--serif); font-size: 3rem; font-weight: 500; color: var(--gold); line-height: 1; }
+    .stat span { font-size: .9rem; color: var(--ink-soft); }
+    @media (max-width: 860px) { .intro-grid { grid-template-columns: 1fr; } }
+
+    /* Itinerario */
+    .itinerary { background: var(--night); color: #f3ede2; }
+    .itinerary .eyebrow { color: var(--gold-light); }
+    .itinerary .lead { color: rgba(243,237,226,.7); }
+    .itin-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; flex-wrap: wrap; margin-bottom: 50px; }
+    .itin-layout { display: grid; grid-template-columns: 340px 1fr; gap: 50px; align-items: start; }
+    .days { list-style: none; border-left: 1px solid rgba(217,181,111,.25); }
+    .days button {
+      all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 70px 1fr; align-items: baseline;
+      width: 100%; padding: 16px 0 16px 24px; position: relative; color: rgba(243,237,226,.55);
+      transition: color .3s;
+    }
+    .days button::before {
+      content: ""; position: absolute; left: -5px; top: 50%; width: 9px; height: 9px; margin-top: -4px;
+      border-radius: 50%; background: var(--night); border: 1px solid rgba(217,181,111,.5); transition: background .3s, transform .3s;
+    }
+    .days button:hover { color: #fff; }
+    .days button[aria-selected="true"] { color: #fff; }
+    .days button[aria-selected="true"]::before { background: var(--gold-light); transform: scale(1.4); }
+    .days button:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+    .days small { font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); }
+    .days strong { font-family: var(--serif); font-size: 1.45rem; font-weight: 500; }
+    .day-panel { position: relative; border-radius: var(--radius); overflow: hidden; min-height: 520px; display: flex; align-items: flex-end; }
+    .day-panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .6s, transform 1.2s; }
+    .day-panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.85)); }
+    .day-text { position: relative; z-index: 2; padding: 40px; max-width: 620px; transition: opacity .5s, transform .5s; }
+    .day-text h3 { font-size: clamp(2rem, 3.4vw, 2.8rem); margin: .2em 0 .3em; }
+    .day-text p { color: rgba(255,255,255,.85); font-weight: 300; }
+    .day-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1em; }
+    .day-tags span { font-size: .8rem; padding: .35em .9em; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; }
+    .fading img, .fading .day-text { opacity: 0; }
+    .fading .day-text { transform: translateY(12px); }
+    @media (max-width: 900px) {
+      .itin-layout { grid-template-columns: 1fr; }
+      .days { display: flex; overflow-x: auto; border-left: 0; border-bottom: 1px solid rgba(217,181,111,.25); gap: 6px; scrollbar-width: none; }
+      .days button { grid-template-columns: 1fr; padding: 12px 16px; white-space: nowrap; }
+      .days button::before { left: 50%; top: auto; bottom: -5px; margin-left: -4px; }
+      .day-panel { min-height: 460px; }
+      .day-text { padding: 26px; }
+    }
+
+    /* Galería */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 240px; gap: 14px; margin-top: 50px;
+    }
+    .gallery-grid figure { position: relative; overflow: hidden; border-radius: 14px; }
+    .gallery-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+    .gallery-grid figure:hover img { transform: scale(1.06); }
+    .gallery-grid figcaption {
+      position: absolute; left: 14px; bottom: 12px; color: #fff; font-size: .85rem; letter-spacing: .08em;
+      text-shadow: 0 1px 8px rgba(0,0,0,.6);
+    }
+    .g-tall { grid-row: span 2; }
+    .g-wide { grid-column: span 2; }
+    @media (max-width: 860px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+    }
+
+    /* Libertad */
+    .freedom { background: var(--paper-2); }
+    .freedom-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+    .freedom img { border-radius: 220px 220px var(--radius) var(--radius); aspect-ratio: 3 / 4; object-fit: cover; width: 100%; }
+    blockquote { font-family: var(--serif); font-size: clamp(1.9rem, 3.2vw, 2.7rem); line-height: 1.2; font-style: italic; margin: .5em 0 .6em; }
+    blockquote::before { content: "“"; display: block; color: var(--gold); font-size: 4rem; line-height: .6; font-style: normal; }
+    .includes { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 30px; margin-top: 1.6em; }
+    .includes li { display: flex; gap: 12px; align-items: flex-start; font-size: 1rem; }
+    .includes li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 5px; border-radius: 50%; background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='white' stroke-width='2.4'%3E%3Cpath d='M5.5 10.5l3 3 6-7'/%3E%3C/svg%3E") center/14px no-repeat; }
+    @media (max-width: 860px) { .freedom-grid { grid-template-columns: 1fr; } .freedom img { max-width: 440px; } }
+    @media (max-width: 520px) { .includes { grid-template-columns: 1fr; } }
+
+    /* Agendar */
+    .booking { background: var(--paper); }
+    .booking-card {
+      display: grid; grid-template-columns: .9fr 1.4fr; border-radius: 28px; overflow: hidden;
+      background: #fff; box-shadow: 0 40px 80px -40px rgba(28,26,23,.35);
+    }
+    .booking-side {
+      position: relative; color: #fff; padding: 50px 44px; display: flex; flex-direction: column; justify-content: space-between; gap: 30px;
+      background: linear-gradient(180deg, rgba(20,19,15,.35), rgba(20,19,15,.9)), url("img/sacsayhuaman.jpg") center/cover;
+    }
+    .booking-side .eyebrow { color: var(--gold-light); }
+    .booking-side h2 { color: #fff; }
+    .booking-side ul { list-style: none; display: grid; gap: 16px; font-size: 1rem; color: rgba(255,255,255,.88); }
+    .booking-side li { display: flex; gap: 12px; }
+    .booking-side li b { font-family: var(--serif); color: var(--gold-light); font-size: 1.4rem; line-height: 1.2; font-weight: 500; min-width: 26px; }
+    .contact-card { border-top: 1px solid rgba(255,255,255,.2); padding-top: 22px; display: grid; gap: 6px; }
+    .contact-card small { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); }
+    .contact-card strong { font-family: var(--serif); font-size: 1.7rem; font-weight: 500; line-height: 1.1; margin-bottom: 4px; }
+    .contact-card a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,.9); font-size: 1rem; overflow-wrap: anywhere; }
+    .contact-card a:hover { color: var(--gold-light); }
+    .contact-card svg { width: 20px; height: 20px; flex: none; color: var(--gold-light); }
+    form { padding: 50px 48px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    label, .label { display: block; font-size: .9rem; font-weight: 500; margin-bottom: 8px; color: var(--ink); }
+    input, select, textarea {
+      width: 100%; font: 400 1.05rem var(--sans); color: var(--ink);
+      padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--paper);
+      transition: border-color .25s, background .25s; min-height: 56px;
+    }
+    input:hover, select:hover, textarea:hover { border-color: var(--gold-light); }
+    input:focus, select:focus, textarea:focus { background: #fff; border-color: var(--gold); outline: none; }
+    textarea { resize: vertical; min-height: 96px; }
+    .chips { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: thin; }
+    .chip {
+      flex: none; cursor: pointer; border: 1.5px solid var(--line); background: #fff; border-radius: 14px;
+      padding: 10px 14px; text-align: center; min-width: 74px; font: inherit; color: var(--ink);
+      transition: border-color .2s, background .2s, color .2s, transform .2s;
+    }
+    .chip:hover { border-color: var(--gold-light); transform: translateY(-1px); }
+    .chip small { display: block; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+    .chip strong { display: block; font-family: var(--serif); font-size: 1.6rem; font-weight: 500; line-height: 1.1; }
+    .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .chip[aria-pressed="true"] small { color: var(--gold-light); }
+    .times .chip { min-width: 0; padding: 12px 18px; font-size: 1rem; }
+    .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .modes .chip { min-width: 0; padding: 14px 10px; font-size: .95rem; }
+    .modes .chip svg { width: 24px; height: 24px; margin: 0 auto 6px; display: block; color: var(--gold); }
+    .modes .chip[aria-pressed="true"] svg { color: var(--gold-light); }
+    .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .form-foot p { font-size: .85rem; color: var(--ink-soft); max-width: 22em; }
+    .error { color: #a3361f; font-size: .9rem; min-height: 1.2em; }
+    .success { padding: 60px 48px; display: none; text-align: center; align-content: center; gap: 18px; }
+    .success svg { width: 72px; height: 72px; margin: 0 auto; color: var(--gold); }
+    .success h3 { font-size: 2.4rem; }
+    .success p { color: var(--ink-soft); max-width: 30em; margin: 0 auto; }
+    .success .summary { background: var(--paper); border-radius: 14px; padding: 18px 22px; text-align: left; font-size: 1rem; display: grid; gap: 6px; max-width: 420px; margin: 6px auto; }
+    .success .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+    .booking-card > *, .itin-layout > * { min-width: 0; }
+    .booking-card.done form { display: none; }
+    .booking-card.done .success { display: grid; }
+    @media (max-width: 960px) { .booking-card { grid-template-columns: 1fr; } .booking-side { padding: 44px 28px; } }
+    @media (max-width: 600px) {
+      form, .success { padding: 34px 22px; }
+      .field-row { grid-template-columns: 1fr; }
+      .modes { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    /* Preguntas */
+    .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(40px, 7vw, 100px); }
+    details { border-bottom: 1px solid var(--line); }
+    summary {
+      list-style: none; cursor: pointer; padding: 24px 40px 24px 0; position: relative;
+      font-family: var(--serif); font-size: 1.55rem; font-weight: 500;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+"; position: absolute; right: 4px; top: 50%; translate: 0 -50%;
+      font-family: var(--sans); font-weight: 300; font-size: 1.8rem; color: var(--gold); transition: transform .3s;
+    }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { padding: 0 40px 24px 0; color: var(--ink-soft); }
+    @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
+
+    /* Cierre y pie */
+    .cta {
+      position: relative; color: #fff; text-align: center; padding: clamp(110px, 16vw, 200px) 0;
+      background: linear-gradient(rgba(14,13,10,.55), rgba(14,13,10,.7)), url("img/machupicchu-panoramica.jpg") center 40%/cover fixed;
+    }
+    .cta h2 { font-size: clamp(2.6rem, 6vw, 5rem); }
+    .cta h2 em { color: var(--gold-light); }
+    .cta p { color: rgba(255,255,255,.85); margin: 0 auto 2em; max-width: 32em; }
+    @media (hover: none) { .cta { background-attachment: scroll; } }
+    footer { background: var(--night); color: rgba(243,237,226,.65); padding: 60px 0 40px; font-size: .92rem; }
+    .foot-grid { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; align-items: center; }
+    .foot-logo img { height: 110px; width: auto; }
+    .foot-contact { display: grid; gap: 4px; }
+    .foot-contact strong { font-family: var(--serif); font-size: 1.6rem; font-weight: 500; color: #fff; }
+    .foot-copy { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(217,181,111,.18); font-size: .85rem; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--gold-light); }
+    .foot-links { display: flex; gap: 26px; flex-wrap: wrap; }
+
+    /* WhatsApp flotante */
+    .wa-float {
+      position: fixed; right: 22px; bottom: 22px; z-index: 40; width: 62px; height: 62px; border-radius: 50%;
+      background: #25d366; color: #fff; display: grid; place-items: center;
+      box-shadow: 0 12px 30px -8px rgba(0,0,0,.4); transition: transform .3s;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float svg { width: 32px; height: 32px; }
+
+    /* Animaciones de aparición */
+    .reveal { opacity: 0; transform: translateY(34px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: .12s; } .reveal.d2 { transition-delay: .24s; } .reveal.d3 { transition-delay: .36s; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="#inicio" aria-label="Nancy Andara · Recorridos Dorados, inicio">
+        <img class="logo-on-dark" src="img/logo-light.png" alt="Nancy Andara, Descubriendo Maravillas" width="418" height="284">
+        <img class="logo-on-light" src="img/logo-dark.png" alt="" width="418" height="284">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#experiencia">Experiencia</a></li>
+        <li><a href="#itinerario">Itinerario</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+        <li><a class="btn btn-gold" href="#agendar">Agendar visita</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Portada -->
+  <section class="hero" id="inicio">
+    <picture>
+      <source media="(max-aspect-ratio: 4/5)" srcset="img/hero-machupicchu.jpg">
+      <img src="img/machupicchu-panoramica.jpg" alt="Machu Picchu entre nubes, sobre el valle del río Urubamba" fetchpriority="high">
+    </picture>
+    <div class="wrap hero-content">
+      <p class="eyebrow reveal">Perú · Cusco · Machu Picchu</p>
+      <h1 class="reveal d1">Recorridos <em>Dorados</em></h1>
+      <p class="hero-sub reveal d2">Aventura <b>&amp;</b> libertad</p>
+      <p class="lead reveal d2">Viajes pensados para quienes ya tienen experiencia de vida y ganas de seguir descubriendo. A tu ritmo, acompañado y con todo resuelto.</p>
+      <div class="hero-actions reveal d3">
+        <a class="btn btn-gold" href="#agendar">Agendar una visita
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#itinerario">Ver el recorrido</a>
+      </div>
+    </div>
+    <span class="hero-meta" aria-hidden="true">13°09′S · 72°32′O · 2.430 m</span>
+    <span class="scroll-cue" aria-hidden="true"></span>
+  </section>
+
+  <!-- Pilares -->
+  <section class="pillars" aria-label="Por qué viajar con nosotros">
+    <div class="wrap">
+      <div class="pillars-grid reveal">
+        <div class="pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <h3>Ritmo pausado</h3>
+          <p>Jornadas cortas, tiempo libre y días de aclimatación incluidos.</p>
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.6-7 10-7 10z"/></svg>
+          <h3>Bienestar primero</h3>
+          <p>Asesoría para la altura, seguro de viaje y asistencia permanente.</p>
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.8 6 5.5"/></svg>
+          <h3>Grupos pequeños</h3>
+          <p>Viajeros afines y un coordinador que acompaña de principio a fin.</p>
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg>
+          <h3>Todo resuelto</h3>
+          <p>Vuelos, traslados, hoteles, entradas y comidas: solo disfrutar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiencia -->
+  <section id="experiencia">
+    <div class="wrap intro-grid">
+      <div class="intro-photos reveal">
+        <img src="img/cusco.jpg" alt="Tejados de Cusco bajo un cielo de nubes" loading="lazy">
+        <img src="img/tren.jpg" alt="Tren rumbo a Machu Picchu en la estación" loading="lazy">
+      </div>
+      <div>
+        <p class="eyebrow reveal">La experiencia</p>
+        <h2 class="reveal d1">La edad dorada es para <em>salir a vivirla</em></h2>
+        <p class="lead reveal d2">Diseñamos cada recorrido para que la emoción de llegar al Machu Picchu no se pierda en el cansancio del camino. Hoteles cómodos, tren panorámico, guías que hablan pausado y un equipo atento a cada detalle.</p>
+        <p class="lead reveal d2" style="margin-top:1em">Tú pones la curiosidad. Nosotros, todo lo demás.</p>
+        <div class="stats reveal d3">
+          <div class="stat"><b>8</b><span>días de viaje</span></div>
+          <div class="stat"><b>4</b><span>destinos icónicos</span></div>
+          <div class="stat"><b>24/7</b><span>acompañamiento</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Itinerario interactivo -->
+  <section class="itinerary" id="itinerario">
+    <div class="wrap">
+      <div class="itin-head">
+        <div>
+          <p class="eyebrow reveal">El recorrido</p>
+          <h2 class="reveal d1">Ocho días, <em>un sueño</em></h2>
+        </div>
+        <p class="lead reveal d2" style="max-width:28em">Selecciona cada etapa para descubrir cómo se vive el viaje, paso a paso.</p>
+      </div>
+      <div class="itin-layout">
+        <ul class="days" role="tablist" aria-label="Etapas del viaje" id="days"></ul>
+        <div class="day-panel" id="dayPanel" role="tabpanel" aria-live="polite">
+          <img id="dayImg" src="" alt="">
+          <div class="day-text">
+            <p class="eyebrow" id="dayEyebrow" style="color:var(--gold-light)"></p>
+            <h3 id="dayTitle"></h3>
+            <p id="dayDesc"></p>
+            <div class="day-tags" id="dayTags"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria">
+    <div class="wrap">
+      <p class="eyebrow reveal">Galería</p>
+      <h2 class="reveal d1">Momentos que <em>ya vivimos</em></h2>
+      <p class="lead reveal d2">Imágenes reales de nuestro recorrido por el Perú.</p>
+      <div class="gallery-grid">
+        <figure class="g-wide g-tall reveal"><img src="img/machupicchu-panoramica.jpg" alt="Ciudadela de Machu Picchu y el valle entre nubes" loading="lazy"><figcaption>Machu Picchu</figcaption></figure>
+        <figure class="g-tall reveal d1"><img src="img/hero-machupicchu.jpg" alt="Huayna Picchu cubierto de nubes" loading="lazy"><figcaption>Huayna Picchu</figcaption></figure>
+        <figure class="reveal d2"><img src="img/alpaca.jpg" alt="Alpaca pastando junto a un muro colonial" loading="lazy"><figcaption>Cusco</figcaption></figure>
+        <figure class="reveal d2"><img src="img/oro-inca.jpg" alt="Pieza de orfebrería inca en exhibición" loading="lazy"><figcaption>Orfebrería inca</figcaption></figure>
+        <figure class="g-tall reveal"><img src="img/aguas-calientes.jpg" alt="Río y puente en Aguas Calientes" loading="lazy"><figcaption>Aguas Calientes</figcaption></figure>
+        <figure class="g-wide reveal d1"><img src="img/sacsayhuaman.jpg" alt="Muros de piedra de Sacsayhuamán" loading="lazy" style="object-position:center 60%"><figcaption>Sacsayhuamán</figcaption></figure>
+        <figure class="g-tall reveal d2"><img src="img/huancaya.jpg" alt="Lagunas turquesas de Huancaya" loading="lazy"><figcaption>Huancaya · próximamente</figcaption></figure>
+        <figure class="g-wide reveal d1"><img src="img/tren.jpg" alt="Tren panorámico en la estación" loading="lazy" style="object-position:center 55%"><figcaption>Tren panorámico</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Libertad -->
+  <section class="freedom">
+    <div class="wrap freedom-grid">
+      <img class="reveal" src="img/libertad.jpg" alt="Viajera con los brazos abiertos frente a la ciudad de Cusco" loading="lazy">
+      <div>
+        <p class="eyebrow reveal">Aventura y libertad</p>
+        <blockquote class="reveal d1">Llegar arriba y abrir los brazos. Eso es lo que venimos a buscar.</blockquote>
+        <p class="lead reveal d2">Cada detalle está pensado para que te sientas seguro, libre y con energía para disfrutar cada mirador.</p>
+        <ul class="includes reveal d3">
+          <li>Vuelos y traslados privados</li>
+          <li>Hoteles con ascensor y buena ubicación</li>
+          <li>Tren panorámico a Aguas Calientes</li>
+          <li>Entradas y guías en español</li>
+          <li>Seguro de viaje con asistencia médica</li>
+          <li>Coordinador durante todo el viaje</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agendar visita -->
+  <section class="booking" id="agendar">
+    <div class="wrap">
+      <div class="booking-card reveal" id="bookingCard">
+        <aside class="booking-side">
+          <div>
+            <p class="eyebrow">Agenda tu visita</p>
+            <h2>Conversemos <em style="color:var(--gold-light)">sin compromiso</em></h2>
+            <p style="color:rgba(255,255,255,.85);font-weight:300">Te contamos el viaje en detalle, resolvemos tus dudas y te ayudamos a decidir con calma.</p>
+          </div>
+          <ul>
+            <li><b>1</b><span>Elige el día y la hora que te acomoden.</span></li>
+            <li><b>2</b><span>Escoge cómo prefieres conversar.</span></li>
+            <li><b>3</b><span>Te confirmamos la cita por WhatsApp o teléfono.</span></li>
+          </ul>
+          <div class="contact-card">
+            <small>Te atiende</small>
+            <strong>Nancy Andara</strong>
+            <a href="mailto:nancygandara@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>nancygandara@gmail.com
+            </a>
+            <a href="#" class="js-wa">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>+56 9 6698 6942
+            </a>
+          </div>
+        </aside>
+
+        <form id="bookingForm" novalidate>
+          <div>
+            <span class="label" id="lblMode">¿Cómo prefieres la visita?</span>
+            <div class="modes" role="group" aria-labelledby="lblMode" id="modes">
+              <button type="button" class="chip" data-value="Presencial" aria-pressed="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10l9-6 9 6v10H3z"/><path d="M9 20v-6h6v6"/></svg>Presencial
+              </button>
+              <button type="button" class="chip" data-value="Videollamada" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>Videollamada
+              </button>
+              <button type="button" class="chip" data-value="Llamada" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>Llamada
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <span class="label" id="lblDate">Elige un día</span>
+            <div class="chips" role="group" aria-labelledby="lblDate" id="dates"></div>
+          </div>
+
+          <div>
+            <span class="label" id="lblTime">Elige una hora</span>
+            <div class="chips times" role="group" aria-labelledby="lblTime" id="times"></div>
+          </div>
+
+          <div class="field-row">
+            <div>
+              <label for="name">Nombre completo</label>
+              <input id="name" name="name" autocomplete="name" required>
+            </div>
+            <div>
+              <label for="phone">Teléfono / WhatsApp</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div>
+              <label for="email">Correo electrónico <span style="color:var(--ink-soft);font-weight:400">(opcional)</span></label>
+              <input id="email" name="email" type="email" autocomplete="email">
+            </div>
+            <div>
+              <label for="people">¿Cuántas personas viajarían?</label>
+              <select id="people" name="people">
+                <option>1 persona</option>
+                <option selected>2 personas</option>
+                <option>3 personas</option>
+                <option>4 personas</option>
+                <option>5 o más</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="notes">¿Algo que debamos saber? <span style="color:var(--ink-soft);font-weight:400">(opcional)</span></label>
+            <textarea id="notes" name="notes" placeholder="Movilidad, dieta, fechas en que te gustaría viajar…"></textarea>
+          </div>
+
+          <p class="error" id="formError" role="alert"></p>
+
+          <div class="form-foot">
+            <p>Tus datos solo se usan para contactarte sobre esta visita.</p>
+            <button class="btn btn-dark" type="submit">Reservar mi visita
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="success" id="success" aria-live="polite">
+          <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="36" cy="36" r="34"/><path d="M22 37l10 10 18-22"/></svg>
+          <h3>¡Visita solicitada!</h3>
+          <p>Gracias, <span id="sName"></span>. Envía la confirmación por WhatsApp o por correo y Nancy te responderá a la brevedad.</p>
+          <div class="summary" id="sSummary"></div>
+          <div class="actions">
+            <a class="btn btn-gold" id="waConfirm" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+            <a class="btn btn-dark" id="mailConfirm" href="#">Enviar por correo</a>
+            <button class="btn" type="button" id="again" style="border-color:var(--line)">Cambiar datos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas frecuentes -->
+  <section id="preguntas" style="padding-top:0">
+    <div class="wrap faq-grid">
+      <div>
+        <p class="eyebrow reveal">Preguntas frecuentes</p>
+        <h2 class="reveal d1">Viajar <em>tranquilo</em></h2>
+        <p class="lead reveal d2">Si tienes otra duda, la resolvemos en tu visita.</p>
+      </div>
+      <div class="reveal d1">
+        <details>
+          <summary>¿Cómo se maneja la altura en Cusco?</summary>
+          <p>El itinerario incluye un día completo de aclimatación, comenzamos por el Valle Sagrado (más bajo que Cusco) y recomendamos una consulta médica previa. El coordinador lleva oxígeno y botiquín.</p>
+        </details>
+        <details>
+          <summary>¿Necesito una condición física especial?</summary>
+          <p>Basta con poder caminar a paso tranquilo en tramos cortos con algunas escaleras. Adaptamos las visitas y siempre hay alternativas con menos esfuerzo.</p>
+        </details>
+        <details>
+          <summary>¿Puedo viajar solo o sola?</summary>
+          <p>¡Claro! Muchos de nuestros viajeros llegan solos y se van con nuevos amigos. Ofrecemos habitación compartida o individual.</p>
+        </details>
+        <details>
+          <summary>¿Qué incluye y cómo se paga?</summary>
+          <p>Te entregamos el detalle completo en la visita. Trabajamos con reserva inicial y cuotas, para que planifiques con calma.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section class="cta">
+    <div class="wrap">
+      <p class="eyebrow reveal" style="color:var(--gold-light)">Tu próximo capítulo</p>
+      <h2 class="reveal d1">El Machu Picchu <em>te espera</em></h2>
+      <p class="reveal d2">Agenda una visita y conversemos sobre el viaje que mereces.</p>
+      <a class="btn btn-gold reveal d3" href="#agendar">Agendar una visita</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-grid">
+      <a href="#inicio" class="foot-logo"><img src="img/logo-gold.png" alt="Nancy Andara, Descubriendo Maravillas" width="418" height="284"></a>
+      <div class="foot-contact">
+        <strong>Nancy Andara</strong>
+        <span>Recorridos Dorados · Aventura y libertad</span>
+        <a href="mailto:nancygandara@gmail.com">nancygandara@gmail.com</a>
+        <a href="#" class="js-wa">WhatsApp +56 9 6698 6942</a>
+      </div>
+      <div class="foot-links">
+        <a href="#experiencia">Experiencia</a>
+        <a href="#itinerario">Itinerario</a>
+        <a href="#agendar">Agendar</a>
+        <a href="#preguntas">Preguntas</a>
+      </div>
+    </div>
+    <p class="wrap foot-copy">© <span id="year"></span> Nancy Andara · Descubriendo Maravillas</p>
+  </footer>
+
+  <a class="wa-float js-wa" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.7-1.2 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
+  </a>
+
+  <script>
+    // Número de WhatsApp del negocio: código de país + número, sin espacios ni "+".
+    const WHATSAPP = "56966986942";
+    const EMAIL = "nancygandara@gmail.com";
+
+    const waLink = (text) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+    document.querySelectorAll(".js-wa").forEach(a => {
+      a.href = waLink("Hola, quiero información sobre el viaje a Machu Picchu de Recorridos Dorados.");
+      a.target = "_blank"; a.rel = "noopener";
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Navegación al hacer scroll
+    const nav = document.getElementById("nav");
+    const onScroll = () => nav.classList.toggle("scrolled", scrollY > 60);
+    addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+    // Aparición de secciones
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: .15, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // Itinerario
+    const DAYS = [
+      { n: "Día 1", place: "Lima", title: "Bienvenida al Perú", img: "img/oro-inca.jpg",
+        desc: "Recepción en el aeropuerto, traslado al hotel y cena de bienvenida con el grupo. Primer contacto con la gastronomía peruana.",
+        tags: ["Traslado privado", "Cena de bienvenida"] },
+      { n: "Día 2", place: "Valle Sagrado", title: "Bajar para subir mejor", img: "img/alpaca.jpg",
+        desc: "Vuelo a Cusco y descenso directo al Valle Sagrado, a menor altura, para aclimatarse con calma entre pueblos, telares y alpacas.",
+        tags: ["Aclimatación", "Mate de coca"] },
+      { n: "Día 3", place: "Aguas Calientes", title: "El tren de los Andes", img: "img/tren.jpg",
+        desc: "Viaje en tren panorámico junto al río Urubamba. Llegada a Aguas Calientes, tarde libre y descanso para el gran día.",
+        tags: ["Tren panorámico", "Tarde libre"] },
+      { n: "Día 4", place: "Machu Picchu", title: "La ciudadela inca", img: "img/machupicchu-panoramica.jpg",
+        desc: "Subida en bus y visita guiada a paso tranquilo por los sectores principales. Tiempo para contemplar, fotografiar y emocionarse.",
+        tags: ["Guía en español", "Ruta adaptada"] },
+      { n: "Día 5", place: "Cusco", title: "El ombligo del mundo", img: "img/cusco.jpg",
+        desc: "Regreso a Cusco. Paseo por la Plaza de Armas, sus calles empedradas y la Catedral, con pausas en cafés con vista.",
+        tags: ["City tour", "Cafés con vista"] },
+      { n: "Día 6", place: "Sacsayhuamán", title: "Piedras que hablan", img: "img/sacsayhuaman.jpg",
+        desc: "Visita a la fortaleza de Sacsayhuamán y miradores sobre la ciudad. Tarde libre para compras de artesanía.",
+        tags: ["Arqueología", "Artesanía"] },
+      { n: "Día 7", place: "Cusco", title: "Despedida dorada", img: "img/libertad.jpg",
+        desc: "Mañana libre y cena de despedida con música andina. Un brindis por la aventura compartida.",
+        tags: ["Mañana libre", "Cena show"] },
+      { n: "Día 8", place: "Regreso", title: "Volver distinto", img: "img/aguas-calientes.jpg",
+        desc: "Traslado al aeropuerto y vuelo de regreso, con la memoria llena y ganas del próximo destino.",
+        tags: ["Traslado", "Asistencia en vuelo"] }
+    ];
+    const daysEl = document.getElementById("days");
+    const panel = document.getElementById("dayPanel");
+    DAYS.forEach(d => { const i = new Image(); i.src = d.img; });
+    DAYS.forEach((d, i) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<button role="tab" aria-selected="${i === 0}" aria-controls="dayPanel"><small>${d.n}</small><strong>${d.place}</strong></button>`;
+      li.firstChild.addEventListener("click", () => showDay(i));
+      daysEl.appendChild(li);
+    });
+    let current = -1;
+    function showDay(i, instant) {
+      if (i === current) return;
+      current = i;
+      daysEl.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-selected", j === i));
+      const d = DAYS[i];
+      const apply = () => {
+        document.getElementById("dayImg").src = d.img;
+        document.getElementById("dayImg").alt = `${d.place}: ${d.title}`;
+        document.getElementById("dayEyebrow").textContent = `${d.n} · ${d.place}`;
+        document.getElementById("dayTitle").textContent = d.title;
+        document.getElementById("dayDesc").textContent = d.desc;
+        document.getElementById("dayTags").innerHTML = d.tags.map(t => `<span>${t}</span>`).join("");
+        panel.classList.remove("fading");
+      };
+      if (instant) return apply();
+      panel.classList.add("fading");
+      setTimeout(apply, 380);
+    }
+    showDay(0, true);
+    daysEl.addEventListener("keydown", e => {
+      if (!["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"].includes(e.key)) return;
+      e.preventDefault();
+      const next = (current + (e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : DAYS.length - 1)) % DAYS.length;
+      showDay(next); daysEl.querySelectorAll("button")[next].focus();
+    });
+
+    // Agenda: chips de opción única
+    function singleSelect(group) {
+      group.addEventListener("click", e => {
+        const chip = e.target.closest(".chip"); if (!chip) return;
+        group.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === chip));
+      });
+    }
+    const datesEl = document.getElementById("dates"), timesEl = document.getElementById("times");
+    const wd = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+    const mo = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+    const longDate = new Intl.DateTimeFormat("es", { weekday: "long", day: "numeric", month: "long" });
+    for (let i = 1, added = 0; added < 12; i++) {
+      const d = new Date(); d.setDate(d.getDate() + i);
+      if (d.getDay() === 0) continue; // sin visitas los domingos
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "false");
+      b.dataset.value = longDate.format(d);
+      b.innerHTML = `<small>${wd[d.getDay()]}</small><strong>${d.getDate()}</strong><small>${mo[d.getMonth()]}</small>`;
+      datesEl.appendChild(b); added++;
+    }
+    ["09:30", "11:00", "12:30", "15:00", "16:30", "18:00"].forEach(t => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "false");
+      b.dataset.value = t; b.textContent = t;
+      timesEl.appendChild(b);
+    });
+    [datesEl, timesEl, document.getElementById("modes")].forEach(singleSelect);
+
+    // Envío del formulario
+    const form = document.getElementById("bookingForm");
+    const card = document.getElementById("bookingCard");
+    const err = document.getElementById("formError");
+    const picked = el => el.querySelector('[aria-pressed="true"]')?.dataset.value;
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const data = {
+        modo: picked(document.getElementById("modes")),
+        dia: picked(datesEl),
+        hora: picked(timesEl),
+        nombre: form.name.value.trim(),
+        telefono: form.phone.value.trim(),
+        email: form.email.value.trim(),
+        personas: form.people.value,
+        notas: form.notes.value.trim()
+      };
+      const missing = [];
+      if (!data.dia) missing.push("un día");
+      if (!data.hora) missing.push("una hora");
+      if (!data.nombre) missing.push("tu nombre");
+      if (data.telefono.replace(/\D/g, "").length < 7) missing.push("un teléfono válido");
+      if (missing.length) { err.textContent = "Por favor indica " + missing.join(", ") + "."; return; }
+      err.textContent = "";
+
+      const msg = [
+        "Hola, quiero agendar una visita con Recorridos Dorados.",
+        `• Nombre: ${data.nombre}`,
+        `• Visita: ${data.modo}`,
+        `• Día: ${data.dia} a las ${data.hora}`,
+        `• Personas: ${data.personas}`,
+        `• Teléfono: ${data.telefono}`,
+        data.email && `• Correo: ${data.email}`,
+        data.notas && `• Notas: ${data.notas}`
+      ].filter(Boolean).join("\n");
+
+      document.getElementById("sName").textContent = data.nombre.split(" ")[0];
+      document.getElementById("sSummary").innerHTML =
+        `<div><b>${data.modo}</b></div><div>${data.dia}, ${data.hora} h</div><div>${data.personas}</div>`;
+      document.getElementById("waConfirm").href = waLink(msg);
+      document.getElementById("mailConfirm").href =
+        `mailto:${EMAIL}?subject=${encodeURIComponent("Solicitud de visita · Recorridos Dorados")}&body=${encodeURIComponent(msg)}`;
+      card.classList.add("done");
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+    document.getElementById("again").addEventListener("click", () => card.classList.remove("done"));
+  </script>
+</body>
+</html>
